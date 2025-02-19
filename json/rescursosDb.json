@@ -1,0 +1,16 @@
+{
+    "recursos": [
+    {
+    "recursos_id" : 1,
+    "tipus": "vehicles",
+    "estat": "disponible"
+    },
+    
+    {
+    "recursos_id": 2,
+    "tipus": "vehicle",
+    "estat": "disponible"
+    }
+    ]
+}
+    
