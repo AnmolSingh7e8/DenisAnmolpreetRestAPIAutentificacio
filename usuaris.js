@@ -33,39 +33,38 @@ app.get("/usuari", (req, res) => {
     res.json(data.usuari);
 });
 
-//Creem un endpoint per obtenir un llibre per id
-app.get("/usuaris/:id", (req, res) => {
+//Creem un endpoint per obtenir un usuari per id
+app.get("/usuari/:id", (req, res) => {
     const data = readData();
     //Extraiem l'id de l'url recordem que req es un objecte tipus requets
     // que conté l'atribut params i el podem consultar
-    const id = parseInt(req.params.id);
-    const user = data.usuari.find((usuari) => usuari.id === id);
+    const usuari_id = parseInt(req.params.id);
+    const usuari = data.usuari.find((usuari) => usuari.usuari_id === usuari_id);
     res.json(usuari);
 });
 
 
-//Creem un endpoint del tipus post per afegir un llibre
+//Creem un endpoint del tipus post per afegir un usuari
 app.post("/usuari", (req, res) => {
     const data = readData();
     const body = req.body;
-    //todo lo que viene en ...body se agrega al nuevo libro
-    const newBook = {
-        id: data.usuari.length + 1,
-        ...body,
+    //tot el que ve al ...body s'afegeix al nou usuari
+    const newUsuari = {
+        ...body
     };
-    data.books.push(newUser);
+    data.usuari.push(newUsuari);
     writeData(data);
-    res.json(newUser);
+    res.json(newUsuari);
 });
 
 
-//Creem un endpoint per modificar un llibre
+//Creem un endpoint per modificar un usuari
 app.put("/usuari/:id", (req, res) => {
     const data = readData();
     const body = req.body;
     const id = parseInt(req.params.id);
     const usuariIndex = data.usuari.findIndex((usuari) => usuari.id === id);
-    data.usuaris[usuariIndex] = {
+    data.usuari[usuariIndex] = {
         ...data.usuari[usuariIndex],
         ...body,
     };
@@ -74,14 +73,14 @@ app.put("/usuari/:id", (req, res) => {
 });
 
 
-//Creem un endpoint per eliminar un llibre
+//Creem un endpoint per eliminar un usuari
 app.delete("/usuari/:id", (req, res) => {
     const data = readData();
     const id = parseInt(req.params.id);
     const usuariIndex = data.usuari.findIndex((usuari) => usuari.id === id);
-    //splice esborra a partir de bookIndex, el número de elements
+    //splice esborra a partir de usuariIndex, el número de elements
     // que li indiqui al segon argument, en aquest cas 1
-    data.usuaris.splice(usuariIndex, 1);
+    data.usuari.splice(usuariIndex, 1);
     writeData(data);
     res.json({ message: "Usuari deleted successfully" });
     });
