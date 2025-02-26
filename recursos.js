@@ -81,7 +81,7 @@ app.delete("/recursos/:id", (req, res) => {
     // que li indiqui al segon argument, en aquest cas 1
     data.recursos.splice(recursosIndex, 1);
     writeData(data);
-    res.json({ message: "Usuari deleted successfully" });
+    res.json({ message: "Recurso deleted successfully" });
     });
 
 ///Funcio per escoltar les dades 

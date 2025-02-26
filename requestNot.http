@@ -1,32 +1,30 @@
-GET http://localhost:3000/usuari
+GET http://localhost:3000/notificacions
 
 ###
 
-GET http://localhost:3000/usuari/2
+GET http://localhost:3000/notificacions/2
 
 ###
 
-POST http://localhost:3000/usuari HTTP/1.1
+POST http://localhost:3000/notificacions HTTP/1.1
 Content-Type: application/json
 
 {
-    "usuari_id": 3,
-    "email": "anmolpreet.singh.7e8@itb.cat",
-    "contrasenya": 14323,
-    "rol": "cliente"
-}
+    "notificacions_id": 3,
+    "data_modificacion": "20/03/2003",
+    "missatge": "Adeu"
+    }
 
 ###
-PUT http://localhost:3000/usuari/3 HTTP/1.1
+PUT http://localhost:3000/notificacions/3 HTTP/1.1
 Content-Type: application/json
 
 {
-    "usuari_id": 3,
-    "email": "anmolpreet.singh.7e8@itb.cat",
-    "contrasenya": 14323,
-    "rol": "cliente"
-}
+    "notificacions_id": 3,
+    "data_modificacion": "20/03/2003",
+    "missatge": "Como estas?"
+    }
 ###
-DELETE http://localhost:3000/usuari/3 HTTP/1.1
+DELETE http://localhost:3000/notificacions/3 HTTP/1.1
 
 
