@@ -27,10 +27,10 @@ app.get("/", (req, res) => {
     res.send("Welcome to the my first API");
 })
 
-app.get("/recursos", (req, res) => {
-    const data = readData();
-    res.json(data.recursos);
-});
+//app.get("/recursos", (req, res) => {
+  //  const data = readData();
+    //res.json(data.recursos);
+//});
 
 //Creem un endpoint per obtenir un recurs per id
 app.get("/recursos/:id", (req, res) => {
