@@ -4,29 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Recursos</title>
-    <link rel="stylesheet" href="/stylesHome.css">
+    <link rel="stylesheet" href="/styleForm.css">
 </head>
 <body>
     <header>
         <h1>Editar Recursos</h1>
-        <nav>
-            <a href="/recursos">Tornar a Recursos</a>
-        </nav>
     </header>
     <main>
         <h2>Edita el recurs</h2>
-        <form action="/recursos/<%= recurs.id %>?_method=PUT" method="POST">
+        <form action="/recursos/<%= recursos.recursos_id %>?_method=PUT" method="POST">
             <label for="name">Nom del recurs:</label>
-            <input type="text" id="name" name="name" value="<%= recurs.name %>" required>
+            <input type="text" id="name" name="name" value="<%= recursos.name %>" required>
             <br>
             <label for="description">Descripció:</label>
-            <textarea id="description" name="description" required><%= recurs.description %></textarea>
+            <textarea id="description" name="description" required><%= recursos.description %></textarea>
             <br>
             <button type="submit">Guardar canvis</button>
         </form>
+        <!-- Botón para volver a la página anterior -->
+        <a href="/recursos" class="back-button">Tornar a Recursos</a>
     </main>
-    <footer>
-        <p>&copy; 2025 Gestió de Recursos</p>
-    </footer>
 </body>
 </html>

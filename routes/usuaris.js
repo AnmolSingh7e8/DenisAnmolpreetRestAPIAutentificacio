@@ -39,4 +39,14 @@ router.get("/:id", (req, res) => {
     res.render("usuariDetall", {user, usuari});
 });
 
+router.get("/editarUsuaris/:id", (req, res) => {
+    const data = readUsuaris();
+    const user={name:"Anmol i Denis"}
+    //Extraiem l'id de l'url recordem que req es un objecte tipus requets
+    // que conté l'atribut params i el podem consultar
+    const usuari_id = parseInt(req.params.id);
+    const usuari = data.usuari.find((usuari) => usuari.usuari_id === usuari_id);
+    res.render("editarUsuaris", {user, usuari});
+});
+
 export default router;

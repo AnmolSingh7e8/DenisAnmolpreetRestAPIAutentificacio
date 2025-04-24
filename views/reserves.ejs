@@ -23,6 +23,7 @@
                         <span>Hora final: <%= reserva.hora_final %> </span>
                         <span>Estat: <%= reserva.estat %> </span>
                         <span><a href="/reserves/<%=reserva.reserves_id%>"> Detall Reserva</a></span>
+                        <span><a href="/reserves/editarReserves/<%=reserva.reserves_id%>"> Editar Reserva</a></span>
                     </li>
                     <% }); %>
             </ul>

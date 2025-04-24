@@ -39,13 +39,12 @@ router.get("/:id", (req, res) => {
     res.render("recursosDetall", {recursos, user});
 });
 
-router.get('/:id/editar', (req, res) => {
-    const recurs = recursos.find(r => r.id === parseInt(req.params.id));
-    if (recurs) {
-        res.render('editarRecursos', { recurs });
-    } else {
-        res.status(404).send('Recurs no trobat');
-    }
+router.get("/editarRecursos/:id", (req, res) => {
+    const data = readRecursos();
+    const user={name:"Anmol i Denis"}
+    const recursos_id = parseInt(req.params.id);
+    const recursos = data.recursos.find((recursos) => recursos.recursos_id === recursos_id);
+        res.render("editarRecursos", { recursos, user });
 });
 
 export default router;
