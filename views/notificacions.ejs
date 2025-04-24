@@ -9,19 +9,18 @@
 </head>
 <body>
     <header>
-        <h1>Gestió de Recursos per <%= user.name %>!</h1>
+        <h1>Gestió d'usuaris per <%= user.name %>!</h1>
         <h2><%- htmlMessage %></h2>
     </header>
     <main>
         <section>
-            <h2>Llista de Recursos</h2>
+            <h2>Sistema de notificacions</h2>
             <ul class="product-list">
-                <% data.recursos.forEach(recurso=> { %>
+                <% data.notificacions.forEach(not=> { %>
                     <li class="product-item">
-                        <span>Tipus recursos: <%= recurso.tipus %></span>
-                        <span>Estat: <%= recurso.estat %> </span>
-                        <span><a href="/recursos/<%=recurso.recursos_id%>"> Detall Recurso</a></span>
-                        <span><a href="/recursos/<%=recurso.recursos_id%>"> Editar Recurso</a></span>
+                        <span>Missatge: <%= not.missatge %> </span>
+                        <span>Data de la modificació: <%= not.data_modificacion %></span>
+                        <span><a href="/notificacions/<%=not.notificacions_id%>"> Detall Usuaris</a></span>
                     </li>
                     <% }); %>
             </ul>

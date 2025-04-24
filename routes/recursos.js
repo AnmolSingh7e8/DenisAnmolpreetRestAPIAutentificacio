@@ -39,4 +39,13 @@ router.get("/:id", (req, res) => {
     res.render("recursosDetall", {recursos, user});
 });
 
+router.get('/:id/editar', (req, res) => {
+    const recurs = recursos.find(r => r.id === parseInt(req.params.id));
+    if (recurs) {
+        res.render('editarRecursos', { recurs });
+    } else {
+        res.status(404).send('Recurs no trobat');
+    }
+});
+
 export default router;

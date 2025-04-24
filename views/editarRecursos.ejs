@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Recursos</title>
+    <link rel="stylesheet" href="/stylesHome.css">
+</head>
+<body>
+    <header>
+        <h1>Editar Recursos</h1>
+        <nav>
+            <a href="/recursos">Tornar a Recursos</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Edita el recurs</h2>
+        <form action="/recursos/<%= recurs.id %>?_method=PUT" method="POST">
+            <label for="name">Nom del recurs:</label>
+            <input type="text" id="name" name="name" value="<%= recurs.name %>" required>
+            <br>
+            <label for="description">Descripció:</label>
+            <textarea id="description" name="description" required><%= recurs.description %></textarea>
+            <br>
+            <button type="submit">Guardar canvis</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2025 Gestió de Recursos</p>
+    </footer>
+</body>
+</html>
