@@ -45,8 +45,11 @@ router.get("/editarNotificacions/:id", (req, res) => {
     //Extraiem l'id de l'url recordem que req es un objecte tipus requets
     // que conté l'atribut params i el podem consultar
     const id = parseInt(req.params.id);
+    console.log("!!!!!!!")
     const notificacio = data.notificacions.find((notificacions) => notificacions.notificacions_id === id);
-    res.render("editarNotificacions", {notificacio, user});
+    
+    console.log("notificacio:", notificacio);
+    res.render("editarNotificacions", {notificacio, user}); 
 });
 
 export default router;

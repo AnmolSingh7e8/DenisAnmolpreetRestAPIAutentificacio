@@ -12,7 +12,7 @@
     </header>
     <main>
         <h2>Edita la notificació</h2>
-        <form action="/notificacions/<%= notificacio.notificacio_id %>?_method=PUT" method="POST">
+        <form action="/notificacions/<%= notificacio.notificacions_id %>?_method=PUT" method="POST">
             <label for="titol">Títol:</label>
             <input type="text" id="titol" name="titol" value="<%= notificacio.titol %>" required>
             <br>
