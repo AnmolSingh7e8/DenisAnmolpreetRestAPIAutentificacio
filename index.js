@@ -22,6 +22,7 @@ app.use('/usuaris', userRoutes);
 app.use('/notificacions', notificacionsRoutes);
 
 
-app.listen(5000, () => {
-    console.log("Server is listening on port 5000");
-});
+app.listen(5001, () => {
+    console.log('Servidor corriendo en el puerto 5001');
+  });
+

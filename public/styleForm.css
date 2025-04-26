@@ -1,3 +1,30 @@
+/* public/styleForm.css */
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+
+body {
+    background-color: #f0f2f5;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo del header principal */
+header {
+    background-color: #4CAF50;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 1.8em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
 /* Estilo general del formulario */
 form {
     max-width: 500px;
@@ -6,8 +33,24 @@ form {
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: inherit;
     border: 1px solid #ddd;
-    text-align: center; /* Centra el contenido del formulario */
+    text-align: center;
+}
+
+form h2 {
+    display: block;
+    background-color: #4CAF50;
+    color: #ffffff;
+    margin: -30px -30px 30px -30px;
+    padding: 20px;
+    font-size: 1.8em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 form label {
@@ -16,14 +59,12 @@ form label {
     margin-bottom: 8px;
     color: #333;
     font-size: 1.1em;
-    text-align: left; /* Mantiene los labels alineados a la izquierda */
+    text-align: left;
 }
 
 form input[type="text"],
 form input[type="email"],
-form input[type="datetime-local"],
-form textarea,
-form select {
+form textarea {
     width: 100%;
     padding: 12px;
     margin-bottom: 20px;
@@ -35,8 +76,7 @@ form select {
 }
 
 form input:focus,
-form textarea:focus,
-form select:focus {
+form textarea:focus {
     border-color: #4CAF50;
     outline: none;
     background-color: #fff;
@@ -65,9 +105,9 @@ form button:hover {
 
 /* Botón para volver */
 .back-button {
-    display: block; /* Cambiado a block para ocupar todo el ancho disponible */
-    margin: 20px auto; /* Centra el botón horizontalmente */
-    padding: 10px 10px;
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
     background-color: #f4f4f9;
     color: #4CAF50;
     text-decoration: none;
@@ -81,12 +121,4 @@ form button:hover {
 .back-button:hover {
     background-color: #4CAF50;
     color: white;
-}
-
-/* Centrar títulos */
-form h2 {
-    text-align: center;
-    color: #4CAF50;
-    margin-bottom: 20px;
-    font-size: 1.8em;
 }

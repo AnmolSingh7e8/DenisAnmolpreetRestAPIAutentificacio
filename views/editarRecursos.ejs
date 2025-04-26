@@ -11,8 +11,9 @@
         <h1>Editar Recursos</h1>
     </header>
     <main>
-        <h2>Edita el recurs</h2>
+        
         <form action="/recursos/<%= recursos.recursos_id %>?_method=PUT" method="POST">
+            <h2>Edita el recurs</h2>
             <label for="name">Nom del recurs:</label>
             <input type="text" id="name" name="name" value="<%= recursos.name %>" required>
             <br>

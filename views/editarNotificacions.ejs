@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Notificació</title>
+    <title>Editar Notificacions</title>
     <link rel="stylesheet" href="/styleForm.css">
 </head>
 <body>
@@ -11,8 +11,8 @@
         <h1>Editar Notificació</h1>
     </header>
     <main>
-        <h2>Edita la notificació</h2>
         <form action="/notificacions/<%= notificacio.notificacions_id %>?_method=PUT" method="POST">
+            <h2>Edita la notificació</h2>
             <label for="titol">Títol:</label>
             <input type="text" id="titol" name="titol" value="<%= notificacio.titol %>" required>
             <br>

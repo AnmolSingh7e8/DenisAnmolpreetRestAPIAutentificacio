@@ -11,8 +11,8 @@
         <h1>Editar Reserves</h1>
     </header>
     <main>
-        <h2>Edita la reserva</h2>
         <form action="/reserves/<%= reserva.reserve_id %>?_method=PUT" method="POST">
+            <h2>Edita la reserva</h2>
             <label for="resourceName">Nom del recurs:</label>
             <input type="text" id="resourceName" name="resourceName" value="<%= reserva.resourceName %>" required>
             <br>

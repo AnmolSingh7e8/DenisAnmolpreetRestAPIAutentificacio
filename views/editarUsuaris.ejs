@@ -11,8 +11,9 @@
         <h1>Editar Usuari</h1>
     </header>
     <main>
-        <h2>Edita l'usuari</h2>
+        
         <form action="/usuaris/<%= usuari.user_id %>?_method=PUT" method="POST">
+            <h2>Edita l'usuari</h2>
             <label for="name">Nom de l'usuari:</label>
             <input type="text" id="name" name="name" value="<%= usuari.name %>" required>
             <br>
