@@ -1,42 +1,86 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+    color: #fff;
 }
 
 form {
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    background: #ffffff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+}
+
+form h2 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: #333;
 }
 
 label {
     display: block;
-    margin-bottom: 5px;
+    text-align: left;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #555;
+    font-size: 14px;
 }
 
 input {
     width: 100%;
     padding: 8px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+input:focus {
+    border-color: #2575fc;
+    outline: none;
+    box-shadow: 0 0 4px rgba(37, 117, 252, 0.4);
 }
 
 button {
-    background-color: #007BFF;
-    color: white;
+    background: #2575fc;
+    color: #fff;
     border: none;
-    padding: 10px;
+    padding: 10px 16px;
     border-radius: 4px;
+    font-size: 14px;
     cursor: pointer;
+    transition: background 0.3s ease;
+    width: 100%;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background: #1a5bb8;
+}
+
+span#errorEmail {
+    display: block;
+    margin-top: -8px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: red;
+    text-align: left;
+}
+
+a {
+    color: #2575fc;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+a:hover {
+    text-decoration: underline;
 }

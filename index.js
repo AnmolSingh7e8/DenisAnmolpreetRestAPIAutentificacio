@@ -1,106 +1,109 @@
-import express from "express";
-import fs from "fs";
-import bodyParser from "body-parser";
-import cookieParser from "cookie-parser";
-import jwt from "jsonwebtoken";
-import recursosRoutes from "./routes/recursos.js";
-import reservesRoutes from "./routes/reserves.js";
-import userRoutes from "./routes/usuaris.js";
-import notificacionsRoutes from "./routes/notificacions.js";
+import express from 'express'
+import {PORT, SECRET_JWT_KEY} from './config.js'
+import { UserRepository } from './user-repository.js';
+import jwt from 'jsonwebtoken'
+import cookieParser from 'cookie-parser';
 
-const SECRET_JWT_KEY = "your-secret-key"; // Cambia esto por una clave segura
-const app = express();
+const app=express();
+app.use(express.json());
+app.use(cookieParser())
+app.use(express.static('public'));
 
-app.use(bodyParser.json());
-app.use(cookieParser());
-app.use(express.static("public")); // Carpeta pública para CSS
-app.set("view engine", "ejs"); // Usar el motor EJS
-app.set("views", "./views"); // Carpeta donde se almacenan los archivos .ejs
-
-// Middleware para verificar el token JWT
-function authenticateToken(req, res, next) {
-    const token = req.cookies?.access_token; // Leer el token de las cookies
-    if (!token) {
-        return res.status(401).send("Acceso no autorizado");
+//inicio middleware
+app.use((req,res,next)=>{
+    const token =req.cookies.access_token
+    req.session={user: null}
+    try{
+        const data=jwt.verify(token,SECRET_JWT_KEY)
+        req.session.user=data
+    }catch(error){
+        req.session.user=null
     }
+    next() // seguir a la siguiente ruta o middleware.
+})
 
-    jwt.verify(token, SECRET_JWT_KEY, (err, user) => {
-        if (err) {
-            return res.status(403).send("Token inválido");
-        }
-        req.user = user; // Guardar los datos del usuario en la solicitud
-        next();
-    });
-}
+app.set('view engine','ejs')
+//Endpoints
+app.get('/',(req,res)=>{
+    const {user}=req.session
+    res.render('index',user)
+});   
 
-// Ruta principal
-app.get("/", (req, res) => {
+app.get('/home', (req, res) => {
     const { user } = req.session;
-    res.render("index", user);
+    console.log("Usuario en la sesión al acceder a /home:", user);
+
+    if (!user) {
+        return res.redirect('/'); // Redirigir al login si no hay sesión
+    }
+    res.render('home', { username: user.username });
 });
 
-// Endpoint para login
-app.post("/login", async (req, res) => {
+app.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body;
-        console.log("llego aqui");
+        console.log("Intentando iniciar sesión...");
         const user = await UserRepository.login({ username, password });
-        console.log("llego aqui 1");
+        console.log("Usuario autenticado");
+
         const token = jwt.sign(
             { id: user._id, username: user.username },
             SECRET_JWT_KEY,
-            {
-                expiresIn: "1h",
-            }
+            { expiresIn: '1h' }
         );
-        console.log("llego aqui 2");
-        res
-            .cookie("access_token", token, {
-                httpOnly: true, // La cookie solo se puede acceder en el servidor
-                secure: process.env.NODE_ENV === "production", // Solo en HTTPS en producción
-                sameSite: "strict", // La cookie solo es accesible dentro del dominio
-                maxAge: 1000 * 60 * 60, // La cookie tiene una validez de una hora
-            })
-            .send({ user, token });
+
+        // Guardar el usuario en la sesión
+        req.session.user = { id: user._id, username: user.username };
+
+        // Configurar la cookie con el token
+        res.cookie('access_token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 1000 * 60 * 60, // 1 hora
+        });
+
+        // Redirigir a la página de inicio (home.ejs)
+        res.redirect('/home');
     } catch (error) {
-        res.status(401).send(error.message); // 401 = No autorizado
+        console.error("Error al iniciar sesión:", error.message);
+        res.status(401).send("Credenciales incorrectas");
     }
 });
 
-// Endpoint para registro
-app.post("/register", async (req, res) => {
-    const { username, password } = req.body;
-    console.log(req.body);
-    try {
-        const id = await UserRepository.create({ username, password });
-        res.send({ id });
-    } catch (error) {
-        res.status(400).send(error.message); // No es buena idea enviar el error del repositorio
+app.post('/register', async (req,res)=>{
+    //aqui el body es el cuerpo de la petición
+    const {username,password}=req.body
+    console.log(req.body)
+    try{
+        const id= await UserRepository.create({username,password});
+        res.send({id})
+    }catch(error){
+        //No es buena idea mandar el error del repositorio
+        res.status(400).send(error.message)
     }
 });
-
-// Endpoint para logout
-app.post("/logout", (req, res) => {
-    res.clearCookie("access_token").json({ message: "logout successful" });
+app.post('/logout',(req,res)=>{
+    res
+    .clearCookie('access_token')
+    .json({message:'logout successfull'})
+    .send('logout');
 });
 
-// Ruta protegida de ejemplo
-app.get("/protected", authenticateToken, (req, res) => {
-    res.send(`Bienvenido, ${req.user.username}`);
+app.get('/protected',(req,res)=>{
+    const {user}=req.session
+    if (!user) return res.status(403).send('acceso no autorizado')
+    res.render('protected',user)
 });
 
-// Proteger rutas específicas
-app.use("/recursos", authenticateToken, recursosRoutes);
-app.use("/reserves", authenticateToken, reservesRoutes);
-app.use("/usuaris", authenticateToken, userRoutes);
-app.use("/notificacions", authenticateToken, notificacionsRoutes);
-
-// Ruta protegida para home
-app.get("/home", authenticateToken, (req, res) => {
-    res.render("home", { username: req.user.username });
+app.get('/admin', (req, res) => {
+    const { user } = req.session; // Verifica si hay un usuario en la sesión
+    if (!user) {
+        return res.redirect('/'); // Redirige al login si no hay sesión
+    }
+    res.render('admin', { username: user.username }); // Renderiza admin.ejs con el nombre del usuario
 });
 
-// Iniciar el servidor
-app.listen(3003, () => {
-    console.log("Servidor corriendo en el puerto 5000");
+app.listen(PORT,()=>{
+    console.log(`Server running on port${PORT}`);
 });
