@@ -3,11 +3,19 @@ import {PORT, SECRET_JWT_KEY} from './config.js'
 import { UserRepository } from './user-repository.js';
 import jwt from 'jsonwebtoken'
 import cookieParser from 'cookie-parser';
+import recursosRoutes from "./routes/recursos.js";
+import reservesRoutes from "./routes/reserves.js";
+import notificacionsRoutes from "./routes/notificacions.js";
+import usuarisRoutes from "./routes/usuaris.js";
 
 const app=express();
 app.use(express.json());
 app.use(cookieParser())
 app.use(express.static('public'));
+app.set('view engine','ejs'); //Fem servir el motor ejs
+app.set('views', './views');
+
+
 
 //inicio middleware
 app.use((req,res,next)=>{
@@ -22,6 +30,11 @@ app.use((req,res,next)=>{
     next() // seguir a la siguiente ruta o middleware.
 })
 
+//Routes
+app.use('/recursos', recursosRoutes);
+app.use('/reserves', reservesRoutes); 
+app.use('/usuaris', usuarisRoutes);
+app.use('/notificacions', notificacionsRoutes);
 app.set('view engine','ejs')
 //Endpoints
 app.get('/',(req,res)=>{

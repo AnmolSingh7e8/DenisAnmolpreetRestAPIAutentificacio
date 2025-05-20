@@ -1,1 +1,12 @@
-[{"_id":"8e045b70-1a78-4ddd-a78e-66d1ab1cb554","username":"Anmolpreet.singh.7e8@itb.cat","password":"$2b$10$VZEdm66yp0JP/PNDc0CFiuUPg6U6GncQwdk.ckoC7jqGLWsQB3Xny"}]
+[
+    {
+        "_id": "1ac97527-33d5-4258-9177-c13867680fa6",
+        "username": "ejemplo1@gmail.com",
+        "password": "$2b$10$JpVH1QotJehauGntGSo9tOAmmkCGXE3FEZR4wSjYJkJzglq./hUzm"
+    },
+    {
+        "_id": "8e045b70-1a78-4ddd-a78e-66d1ab1cb554",
+        "username": "Anmolpreet.singh.7e8@itb.cat",
+        "password": "$2b$10$VZEdm66yp0JP/PNDc0CFiuUPg6U6GncQwdk.ckoC7jqGLWsQB3Xny"
+    }
+]
